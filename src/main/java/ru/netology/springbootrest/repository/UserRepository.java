@@ -2,26 +2,27 @@ package ru.netology.springbootrest.repository;
 
 import org.springframework.stereotype.Repository;
 import ru.netology.springbootrest.model.Authorities;
+import ru.netology.springbootrest.model.User;
 
 import java.util.*;
 
 @Repository
 public class UserRepository {
-    public Map<String,String> credentials = new HashMap<>();
-    public Map<String, List<Authorities>> authorities = new HashMap<>();
-    public List<Authorities> getUserAuthorities(String user, String password) {
+    public Map<User, List<Authorities>> authorities = new HashMap<>();
+    public List<Authorities> getUserAuthorities(User user) {
 
         //для тестирования
-        String testUsername = "Alexey";
-        String testPassword = "12345";
+        User testUser = new User();
+        testUser.setUser("Alexey");
+        testUser.setPassword("123456");
+
         List<Authorities> testAuthorities = new ArrayList<>();
         testAuthorities.add(Authorities.READ);
         testAuthorities.add(Authorities.WRITE);
         testAuthorities.add(Authorities.DELETE);
-        credentials.put(testUsername, testPassword);
-        authorities.put(testUsername, testAuthorities);
+        authorities.put(testUser, testAuthorities);
 
-        if(credentials.get(user).equals(password)) {
+        if(user.getPassword().equals("123456")) {
             return authorities.get(user);
         }
         return Collections.emptyList();
