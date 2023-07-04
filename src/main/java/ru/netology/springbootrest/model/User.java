@@ -1,18 +1,15 @@
 package ru.netology.springbootrest.model;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
-@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
-
-    @NotBlank(message = "Username is mandatory!")
     private String user;
-    @NotBlank(message = "Password is mandatory!")
-    @Size(min=6, max=12)
     private String password;
+    private List<Authorities> authoritiesList;
 }

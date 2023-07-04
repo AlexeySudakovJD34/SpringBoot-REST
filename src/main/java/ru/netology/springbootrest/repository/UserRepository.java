@@ -8,22 +8,19 @@ import java.util.*;
 
 @Repository
 public class UserRepository {
-    public Map<User, List<Authorities>> authorities = new HashMap<>();
     public List<Authorities> getUserAuthorities(User user) {
 
         //для тестирования
-        User testUser = new User();
-        testUser.setUser("Alexey");
-        testUser.setPassword("123456");
+        List<User> testUsers = List.of(
+                new User("Alexey", "123456", List.of(Authorities.READ, Authorities.DELETE)),
+                new User("Sergey", "1231111", List.of(Authorities.WRITE, Authorities.DELETE)),
+                new User("Semen", "123456", List.of(Authorities.DELETE))
+        );
 
-        List<Authorities> testAuthorities = new ArrayList<>();
-        testAuthorities.add(Authorities.READ);
-        testAuthorities.add(Authorities.WRITE);
-        testAuthorities.add(Authorities.DELETE);
-        authorities.put(testUser, testAuthorities);
-
-        if(user.getPassword().equals("123456")) {
-            return authorities.get(user);
+        for (User testUser : testUsers) {
+            if (testUser.getUser().equals(user.getUser()) & testUser.getPassword().equals(user.getPassword())) {
+                return testUser.getAuthoritiesList();
+            }
         }
         return Collections.emptyList();
     }

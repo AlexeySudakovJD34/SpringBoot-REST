@@ -19,11 +19,9 @@ public class AuthorizationExceptionHandler {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<String> handleInvalidCredentials(ConstraintViolationException ex) {
-        return new ResponseEntity<>(ex.getConstraintViolations().stream()
-                .map(ConstraintViolation::getMessage)
-                .collect(Collectors.joining(" ")),
-                HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(InvalidCredentials.class)
+    public ResponseEntity<String> handleInvalidCredentials(InvalidCredentials ex) {
+        System.out.println(ex.getMessage());
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
