@@ -1,6 +1,7 @@
 package ru.netology.springbootrest.repository;
 
 import org.springframework.stereotype.Repository;
+import ru.netology.springbootrest.exceptions.UnauthorizedUser;
 import ru.netology.springbootrest.model.Authorities;
 
 import java.util.*;
@@ -14,14 +15,11 @@ public class UserRepository {
         //для тестирования
         String testUsername = "Alexey";
         String testPassword = "12345";
-        List<Authorities> testAuthorities = new ArrayList<>();
-        testAuthorities.add(Authorities.READ);
-        testAuthorities.add(Authorities.WRITE);
-        testAuthorities.add(Authorities.DELETE);
+        List<Authorities> testAuthorities = List.of(Authorities.READ,Authorities.DELETE);
         credentials.put(testUsername, testPassword);
         authorities.put(testUsername, testAuthorities);
 
-        if(credentials.get(user).equals(password)) {
+        if (credentials.containsKey(user) & credentials.get(user).equals(password)) {
             return authorities.get(user);
         }
         return Collections.emptyList();
