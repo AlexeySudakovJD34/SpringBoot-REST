@@ -18,7 +18,7 @@ public class UserRepository {
         );
 
         for (User testUser : testUsers) {
-            if (testUser.getUser().equals(user.getUser()) & testUser.getPassword().equals(user.getPassword())) {
+            if (testUser.getUser().equals(user.getUser()) && testUser.getPassword().equals(user.getPassword())) {
                 return testUser.getAuthoritiesList();
             }
         }
