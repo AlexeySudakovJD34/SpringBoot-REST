@@ -19,7 +19,7 @@ public class UserRepository {
         credentials.put(testUsername, testPassword);
         authorities.put(testUsername, testAuthorities);
 
-        if (credentials.containsKey(user) & credentials.get(user).equals(password)) {
+        if (credentials.containsKey(user) && credentials.get(user).equals(password)) {
             return authorities.get(user);
         }
         return Collections.emptyList();
